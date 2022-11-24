@@ -1,12 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
 using Xunit;
 using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DecimalToStringAnalyzer,
-    MigrateToDocker.Analyzers.CodeFixes.DecimalToStringAnalyzerCodeFixProvider>;
+    MigrateToDocker.Analyzers.DateTimeOffsetToStringAnalyzer,
+    MigrateToDocker.Analyzers.CodeFixes.DateTimeOffsetToStringAnalyzerCodeFixProvider>;
 
 namespace MigrateToDocker.Analyzers.Test
 {
-    public class DecimalToStringAnalyzerTest
+    public class DateTimeOffsetToStringAnalyzerTest
     {
         [Fact]
         public async Task NoCode_WithoutDiagnostics()
@@ -28,8 +28,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
@@ -49,8 +49,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString();
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -65,13 +65,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
@@ -92,8 +92,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString();
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -107,13 +107,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)

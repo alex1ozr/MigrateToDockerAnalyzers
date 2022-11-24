@@ -5,12 +5,12 @@ using MigrateToDocker.Analyzers.Abstract;
 namespace MigrateToDocker.Analyzers;
 
 /// <summary>
-/// Parameterless <see cref="float.ToString()"/> method usage analyzer
+/// Parameterless <see cref="DateTime.ToString()"/> method usage analyzer
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class FloatToStringAnalyzer : ToStringAnalyzerBase
+public sealed class DateTimeToStringAnalyzer : ToStringAnalyzerBase
 {
-    public const string DiagnosticId = nameof(FloatToStringAnalyzer);
+    public const string DiagnosticId = nameof(DateTimeToStringAnalyzer);
 
     private static readonly DiagnosticDescriptor descriptor = new(
         DiagnosticId,
@@ -25,5 +25,5 @@ public sealed class FloatToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "float.ToString()";
+    protected override string MethodSymbol => "System.DateTime.ToString()";
 }

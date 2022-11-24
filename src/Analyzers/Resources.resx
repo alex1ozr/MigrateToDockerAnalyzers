@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ToStringAnalyzer_Description" xml:space="preserve">
-    <value>Do not use parameterless ToString() method for numeric types</value>
+    <value>Do not use parameterless ToString() method for culture dependent types</value>
   </data>
   <data name="ToStringAnalyzer_MessageFormat" xml:space="preserve">
-    <value>Do not use parameterless ToString() method for numeric types</value>
+    <value>Do not use parameterless ToString() method for culture dependent types</value>
   </data>
   <data name="ToStringAnalyzer_Title" xml:space="preserve">
-    <value>Parameterless ToString() method usage for numeric type</value>
+    <value>Parameterless ToString() method usage for culture dependent types</value>
   </data>
 </root>

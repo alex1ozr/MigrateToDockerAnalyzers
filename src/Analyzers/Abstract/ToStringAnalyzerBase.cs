@@ -11,19 +11,6 @@ namespace MigrateToDocker.Analyzers.Abstract;
 /// </summary>
 public abstract class ToStringAnalyzerBase : DiagnosticAnalyzer
 {
-    protected static readonly LocalizableString Title = new LocalizableResourceString(
-        nameof(Resources.ToStringAnalyzer_Title),
-        Resources.ResourceManager,
-        typeof(Resources));
-    protected static readonly LocalizableString MessageFormat = new LocalizableResourceString(
-        nameof(Resources.ToStringAnalyzer_MessageFormat),
-        Resources.ResourceManager,
-        typeof(Resources));
-    protected static readonly LocalizableString Description = new LocalizableResourceString(
-        nameof(Resources.ToStringAnalyzer_Description),
-        Resources.ResourceManager,
-        typeof(Resources));
-
     /// <summary>
     /// Analyzer Category
     /// </summary>

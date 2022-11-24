@@ -14,12 +14,12 @@ public sealed class DecimalToStringAnalyzer : ToStringAnalyzerBase
 
     private static readonly DiagnosticDescriptor descriptor = new(
         DiagnosticId,
-        Title,
-        MessageFormat,
+        LocalizableStrings.ToStringAnalyzer.Title,
+        LocalizableStrings.ToStringAnalyzer.MessageFormat,
         Category,
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        Description);
+        LocalizableStrings.ToStringAnalyzer.Description);
 
     /// <inheritdoc/>
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;

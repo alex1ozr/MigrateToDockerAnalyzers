@@ -1,12 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
 using Xunit;
 using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DecimalToStringAnalyzer,
-    MigrateToDocker.Analyzers.CodeFixes.DecimalToStringAnalyzerCodeFixProvider>;
+    MigrateToDocker.Analyzers.DateTimeToStringAnalyzer,
+    MigrateToDocker.Analyzers.CodeFixes.DateTimeToStringAnalyzerCodeFixProvider>;
 
 namespace MigrateToDocker.Analyzers.Test
 {
-    public class DecimalToStringAnalyzerTest
+    public class DateTimeToStringAnalyzerTest
     {
         [Fact]
         public async Task NoCode_WithoutDiagnostics()
@@ -28,8 +28,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTime dt = DateTime.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
@@ -49,8 +49,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString();
+            DateTime dt = DateTime.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -65,13 +65,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTime dt = DateTime.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeToStringAnalyzer))
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
@@ -92,8 +92,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString();
+            DateTime dt = DateTime.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -107,13 +107,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTime dt = DateTime.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeToStringAnalyzer))
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
