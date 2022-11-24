@@ -62,5 +62,23 @@ namespace MigrateToDocker.Analyzers {
                 return ResourceManager.GetString("ToStringAnalyzer_Title", resourceCulture);
             }
         }
+        
+        internal static string ParseAnalyzer_Description {
+            get {
+                return ResourceManager.GetString("ParseAnalyzer_Description", resourceCulture);
+            }
+        }
+        
+        internal static string ParseAnalyzer_MessageFormat {
+            get {
+                return ResourceManager.GetString("ParseAnalyzer_MessageFormat", resourceCulture);
+            }
+        }
+        
+        internal static string ParseAnalyzer_Title {
+            get {
+                return ResourceManager.GetString("ParseAnalyzer_Title", resourceCulture);
+            }
+        }
     }
 }

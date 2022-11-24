@@ -1,12 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 using Xunit;
-using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DateTimeOffsetToStringAnalyzer,
-    MigrateToDocker.Analyzers.CodeFixes.DateTimeOffsetToStringAnalyzerCodeFixProvider>;
+using VerifyCS = MigrateToDocker.Analyzers.Test.Verifiers.CSharpCodeFixVerifier<
+    MigrateToDocker.Analyzers.ToStringAnalyzers.DecimalToStringAnalyzer,
+    MigrateToDocker.Analyzers.CodeFixes.DecimalToStringAnalyzerCodeFixProvider>;
 
-namespace MigrateToDocker.Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.ToStringAnalyzers
 {
-    public class DateTimeOffsetToStringAnalyzerTest
+    public class DecimalToStringAnalyzerTest
     {
         [Fact]
         public async Task NoCode_WithoutDiagnostics()
@@ -28,8 +29,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            DateTimeOffset dt = DateTimeOffset.Now;
-            string str = dt.ToString(CultureInfo.InvariantCulture);
+            decimal num = 1.5M;
+            string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
@@ -49,8 +50,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            DateTimeOffset dt = DateTimeOffset.Now;
-            string str = dt.ToString();
+            decimal num = 1.5M;
+            string str = num.ToString();
         }
     }
 }";
@@ -65,13 +66,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            DateTimeOffset dt = DateTimeOffset.Now;
-            string str = dt.ToString(CultureInfo.InvariantCulture);
+            decimal num = 1.5M;
+            string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
@@ -92,8 +93,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            DateTimeOffset dt = DateTimeOffset.Now;
-            string str = dt.ToString();
+            decimal num = 1.5M;
+            string str = num.ToString();
         }
     }
 }";
@@ -107,13 +108,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            DateTimeOffset dt = DateTimeOffset.Now;
-            string str = dt.ToString(CultureInfo.InvariantCulture);
+            decimal num = 1.5M;
+            string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)

@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis;
 using System.Composition;
+using MigrateToDocker.Analyzers.CodeFixes.Abstract;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 
 namespace MigrateToDocker.Analyzers.CodeFixes;
 

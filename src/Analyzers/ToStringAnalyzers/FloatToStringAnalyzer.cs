@@ -1,8 +1,8 @@
-﻿using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using MigrateToDocker.Analyzers.Abstract;
 
-namespace MigrateToDocker.Analyzers;
+namespace MigrateToDocker.Analyzers.ToStringAnalyzers;
 
 /// <summary>
 /// Parameterless <see cref="float.ToString()"/> method usage analyzer

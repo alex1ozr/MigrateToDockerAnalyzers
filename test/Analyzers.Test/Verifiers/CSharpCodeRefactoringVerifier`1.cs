@@ -1,9 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Testing;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.Verifiers
 {
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()

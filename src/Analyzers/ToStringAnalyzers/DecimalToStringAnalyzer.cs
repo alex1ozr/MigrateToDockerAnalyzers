@@ -1,16 +1,16 @@
-﻿using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using MigrateToDocker.Analyzers.Abstract;
 
-namespace MigrateToDocker.Analyzers;
+namespace MigrateToDocker.Analyzers.ToStringAnalyzers;
 
 /// <summary>
-/// Parameterless <see cref="DateTime.ToString()"/> method usage analyzer
+/// Parameterless <see cref="decimal.ToString()"/> method usage analyzer
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DateTimeToStringAnalyzer : ToStringAnalyzerBase
+public sealed class DecimalToStringAnalyzer : ToStringAnalyzerBase
 {
-    public const string DiagnosticId = nameof(DateTimeToStringAnalyzer);
+    public const string DiagnosticId = nameof(DecimalToStringAnalyzer);
 
     private static readonly DiagnosticDescriptor descriptor = new(
         DiagnosticId,
@@ -25,5 +25,5 @@ public sealed class DateTimeToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "System.DateTime.ToString()";
+    protected override string MethodSymbol => "decimal.ToString()";
 }

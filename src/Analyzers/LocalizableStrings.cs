@@ -21,4 +21,22 @@ internal static class LocalizableStrings
             Resources.ResourceManager,
             typeof(Resources));
     }
+    
+    internal static class ParseAnalyzer
+    {
+        public static readonly LocalizableString Title = new LocalizableResourceString(
+            nameof(Resources.ParseAnalyzer_Title),
+            Resources.ResourceManager,
+            typeof(Resources));
+
+        public static readonly LocalizableString MessageFormat = new LocalizableResourceString(
+            nameof(Resources.ParseAnalyzer_MessageFormat),
+            Resources.ResourceManager,
+            typeof(Resources));
+
+        public static readonly LocalizableString Description = new LocalizableResourceString(
+            nameof(Resources.ParseAnalyzer_Description),
+            Resources.ResourceManager,
+            typeof(Resources));
+    } 
 }

@@ -1,10 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 using Xunit;
-using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.FloatToStringAnalyzer,
+using VerifyCS = MigrateToDocker.Analyzers.Test.Verifiers.CSharpCodeFixVerifier<
+    MigrateToDocker.Analyzers.ToStringAnalyzers.FloatToStringAnalyzer,
     MigrateToDocker.Analyzers.CodeFixes.FloatToStringAnalyzerCodeFixProvider>;
 
-namespace MigrateToDocker.Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.ToStringAnalyzers
 {
     public class FloatToStringAnalyzerTest
     {

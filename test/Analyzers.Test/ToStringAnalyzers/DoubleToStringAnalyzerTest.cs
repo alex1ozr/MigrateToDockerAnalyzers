@@ -1,12 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 using Xunit;
-using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DecimalToStringAnalyzer,
-    MigrateToDocker.Analyzers.CodeFixes.DecimalToStringAnalyzerCodeFixProvider>;
+using VerifyCS = MigrateToDocker.Analyzers.Test.Verifiers.CSharpCodeFixVerifier<
+    MigrateToDocker.Analyzers.ToStringAnalyzers.DoubleToStringAnalyzer,
+    MigrateToDocker.Analyzers.CodeFixes.DoubleToStringAnalyzerCodeFixProvider>;
 
-namespace MigrateToDocker.Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.ToStringAnalyzers
 {
-    public class DecimalToStringAnalyzerTest
+    public class DoubleToStringAnalyzerTest
     {
         [Fact]
         public async Task NoCode_WithoutDiagnostics()
@@ -28,7 +29,7 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
+            double num = 1.5;
             string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
@@ -49,7 +50,7 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
+            double num = 1.5;
             string str = num.ToString();
         }
     }
@@ -65,13 +66,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
+            double num = 1.5;
             string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DoubleToStringAnalyzer))
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
@@ -92,7 +93,7 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
+            double num = 1.5;
             string str = num.ToString();
         }
     }
@@ -107,13 +108,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            decimal num = 1.5M;
+            double num = 1.5;
             string str = num.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DecimalToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DoubleToStringAnalyzer))
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)

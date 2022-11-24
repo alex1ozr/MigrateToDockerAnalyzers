@@ -1,12 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 using Xunit;
-using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DoubleToStringAnalyzer,
-    MigrateToDocker.Analyzers.CodeFixes.DoubleToStringAnalyzerCodeFixProvider>;
+using VerifyCS = MigrateToDocker.Analyzers.Test.Verifiers.CSharpCodeFixVerifier<
+    MigrateToDocker.Analyzers.ToStringAnalyzers.DateTimeOffsetToStringAnalyzer,
+    MigrateToDocker.Analyzers.CodeFixes.DateTimeOffsetToStringAnalyzerCodeFixProvider>;
 
-namespace MigrateToDocker.Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.ToStringAnalyzers
 {
-    public class DoubleToStringAnalyzerTest
+    public class DateTimeOffsetToStringAnalyzerTest
     {
         [Fact]
         public async Task NoCode_WithoutDiagnostics()
@@ -28,8 +29,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            double num = 1.5;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
@@ -49,8 +50,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            double num = 1.5;
-            string str = num.ToString();
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -65,13 +66,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            double num = 1.5;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DoubleToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
@@ -92,8 +93,8 @@ namespace SomeApplication
     {
         void Main()
         {
-            double num = 1.5;
-            string str = num.ToString();
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString();
         }
     }
 }";
@@ -107,13 +108,13 @@ namespace SomeApplication
     {
         void Main()
         {
-            double num = 1.5;
-            string str = num.ToString(CultureInfo.InvariantCulture);
+            DateTimeOffset dt = DateTimeOffset.Now;
+            string str = dt.ToString(CultureInfo.InvariantCulture);
         }
     }
 }";
 
-            var expected = VerifyCS.Diagnostic(nameof(DoubleToStringAnalyzer))
+            var expected = VerifyCS.Diagnostic(nameof(DateTimeOffsetToStringAnalyzer))
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)

@@ -1,10 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
+using MigrateToDocker.Analyzers.ToStringAnalyzers;
 using Xunit;
-using VerifyCS = Analyzers.Test.CSharpCodeFixVerifier<
-    MigrateToDocker.Analyzers.DateTimeToStringAnalyzer,
+using VerifyCS = MigrateToDocker.Analyzers.Test.Verifiers.CSharpCodeFixVerifier<
+    MigrateToDocker.Analyzers.ToStringAnalyzers.DateTimeToStringAnalyzer,
     MigrateToDocker.Analyzers.CodeFixes.DateTimeToStringAnalyzerCodeFixProvider>;
 
-namespace MigrateToDocker.Analyzers.Test
+namespace MigrateToDocker.Analyzers.Test.ToStringAnalyzers
 {
     public class DateTimeToStringAnalyzerTest
     {

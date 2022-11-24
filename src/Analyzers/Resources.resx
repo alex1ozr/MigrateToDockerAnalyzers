@@ -126,4 +126,13 @@
   <data name="ToStringAnalyzer_Title" xml:space="preserve">
     <value>Parameterless ToString() method usage for culture dependent types</value>
   </data>
+  <data name="ParseAnalyzer_Description" xml:space="preserve">
+    <value>Do not use Parse() method without format or culture argument for culture dependent types</value>
+  </data>
+  <data name="ParseAnalyzer_MessageFormat" xml:space="preserve">
+    <value>Do not use Parse() method without format or culture argument for culture dependent types</value>
+  </data>
+  <data name="ParseAnalyzer_Title" xml:space="preserve">
+    <value>Parse() method usage without explicit format or culture for culture dependent types</value>
+  </data>
 </root>
