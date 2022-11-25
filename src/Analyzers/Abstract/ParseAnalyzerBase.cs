@@ -24,9 +24,9 @@ public abstract class ParseAnalyzerBase : DiagnosticAnalyzer
     protected abstract DiagnosticDescriptor DiagnosticDescriptor { get; }
 
     /// <summary>
-    /// Methods symbols to look for
+    /// Member symbols to look for
     /// </summary>
-    protected abstract IReadOnlyCollection<string> MethodSymbols { get; }
+    protected abstract IReadOnlyCollection<string> TargetMemberSymbols { get; }
 
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
@@ -60,7 +60,7 @@ public abstract class ParseAnalyzerBase : DiagnosticAnalyzer
             return;
         }
 
-        if (!MethodSymbols.Any(x => memberSymbol!.StartsWith(x)))
+        if (!TargetMemberSymbols.Any(x => memberSymbol!.StartsWith(x)))
         {
             return;
         }

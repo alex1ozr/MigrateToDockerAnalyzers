@@ -25,5 +25,5 @@ public sealed class DoubleToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "double.ToString()";
+    protected override string TargetMemberSymbol => "double.ToString()";
 }

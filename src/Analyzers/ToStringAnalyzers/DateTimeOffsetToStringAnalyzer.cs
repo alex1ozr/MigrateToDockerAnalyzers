@@ -25,5 +25,5 @@ public sealed class DateTimeOffsetToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "System.DateTimeOffset.ToString()";
+    protected override string TargetMemberSymbol => "System.DateTimeOffset.ToString()";
 }

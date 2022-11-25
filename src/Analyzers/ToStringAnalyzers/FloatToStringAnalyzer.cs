@@ -25,5 +25,5 @@ public sealed class FloatToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "float.ToString()";
+    protected override string TargetMemberSymbol => "float.ToString()";
 }

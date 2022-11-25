@@ -25,5 +25,5 @@ public sealed class DecimalToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "decimal.ToString()";
+    protected override string TargetMemberSymbol => "decimal.ToString()";
 }

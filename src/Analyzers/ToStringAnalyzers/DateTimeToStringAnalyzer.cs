@@ -25,5 +25,5 @@ public sealed class DateTimeToStringAnalyzer : ToStringAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override string MethodSymbol => "System.DateTime.ToString()";
+    protected override string TargetMemberSymbol => "System.DateTime.ToString()";
 }

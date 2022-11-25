@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MigrateToDocker.Analyzers.Abstract;
-using MigrateToDocker.Analyzers.ToStringAnalyzers;
 
 namespace MigrateToDocker.Analyzers.ParseAnalyzers;
 
@@ -30,5 +29,5 @@ public sealed class FloatParseAnalyzer : ParseAnalyzerBase
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override IReadOnlyCollection<string> MethodSymbols => methodSymbols;
+    protected override IReadOnlyCollection<string> TargetMemberSymbols => methodSymbols;
 }

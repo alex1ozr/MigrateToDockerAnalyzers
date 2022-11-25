@@ -22,9 +22,9 @@ public abstract class ToStringAnalyzerBase : DiagnosticAnalyzer
     protected abstract DiagnosticDescriptor DiagnosticDescriptor { get; }
 
     /// <summary>
-    /// Method symbol to look for
+    /// Member symbol to look for
     /// </summary>
-    protected abstract string MethodSymbol { get; }
+    protected abstract string TargetMemberSymbol { get; }
 
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics 
@@ -52,7 +52,7 @@ public abstract class ToStringAnalyzerBase : DiagnosticAnalyzer
             .GetSymbolInfo(invocationExpression)
             .Symbol?.ToString();
 
-        if (memberSymbol == null || !memberSymbol.StartsWith(MethodSymbol))
+        if (memberSymbol == null || !memberSymbol.StartsWith(TargetMemberSymbol))
         {
             return;
         }
