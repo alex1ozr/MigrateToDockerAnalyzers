@@ -5,7 +5,7 @@ so it is recommended to pass concrete format / culture to all ToString() / Parse
 for primitive types at least.
 
 ### Analyzers list
-#### Parameterless ToString() method usage for culture-dependent types
+#### Parameterless ToString() method usage for culture-dependent types (codefixes included)
 - DateTime
 - DateTimeOffset
 - Decimal
