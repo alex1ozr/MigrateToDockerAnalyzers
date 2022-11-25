@@ -83,7 +83,7 @@ namespace SomeApplication
                 .WithLocation(line: 10, column: 25)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
-                .WithMessage("Do not use Parse() method without format or culture argument for culture dependent types");
+                .WithMessage("Do not use Parse() method without format or culture argument for culture-dependent types");
 
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
@@ -110,7 +110,7 @@ namespace SomeApplication
                 .WithLocation(line: 10, column: 13)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
-                .WithMessage("Do not use Parse() method without format or culture argument for culture dependent types");
+                .WithMessage("Do not use Parse() method without format or culture argument for culture-dependent types");
 
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }

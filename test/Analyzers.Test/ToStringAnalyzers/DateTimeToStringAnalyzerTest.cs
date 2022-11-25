@@ -76,7 +76,7 @@ namespace SomeApplication
                 .WithLocation(line: 10, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
-                .WithMessage("Do not use parameterless ToString() method for culture dependent types");
+                .WithMessage("Do not use parameterless ToString() method for culture-dependent types");
 
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixTest);
         }
@@ -118,7 +118,7 @@ namespace SomeApplication
                 .WithLocation(line: 11, column: 26)
                 .WithArguments("ClassName")
                 .WithSeverity(DiagnosticSeverity.Warning)
-                .WithMessage("Do not use parameterless ToString() method for culture dependent types");
+                .WithMessage("Do not use parameterless ToString() method for culture-dependent types");
 
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixTest);
         }
