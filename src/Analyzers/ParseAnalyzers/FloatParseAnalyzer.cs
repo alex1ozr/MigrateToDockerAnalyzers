@@ -22,12 +22,12 @@ public sealed class FloatParseAnalyzer : ParseAnalyzerBase
         isEnabledByDefault: true,
         LocalizableStrings.ParseAnalyzer.Description);
 
-    private static readonly string[] methodSymbols =
+    private static readonly string[] memberSymbols =
         { "float.Parse(string)", "float.TryParse(string?, out float)" };
 
     /// <inheritdoc/>
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;
 
     /// <inheritdoc/>
-    protected override IReadOnlyCollection<string> TargetMemberSymbols => methodSymbols;
+    protected override IReadOnlyCollection<string> TargetMemberSymbols => memberSymbols;
 }

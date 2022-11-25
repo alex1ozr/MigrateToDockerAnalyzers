@@ -16,65 +16,68 @@ namespace MigrateToDocker.Analyzers.Test.ParseAnalyzers
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-        [Fact]
-        public async Task ParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.FloatType), MemberType = typeof(TestData))]
+        public async Task ParseWithFormat_WithoutDiagnostics(string floatType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            float num = float.Parse(str, CultureInfo.InvariantCulture);
-        }
-    }
-}";
+            float num = {floatType}.Parse(str, CultureInfo.InvariantCulture);
+        }}
+    }}
+}}";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
         
-        [Fact]
-        public async Task TryParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.FloatType), MemberType = typeof(TestData))]
+        public async Task TryParseWithFormat_WithoutDiagnostics(string floatType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            float.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
-        }
-    }
-}";
+            {floatType}.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
+        }}
+    }}
+}}";
             
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
 
-        [Fact]
-        public async Task ParseWithoutCulture_WithDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.FloatType), MemberType = typeof(TestData))]
+        public async Task ParseWithoutCulture_WithDiagnostics(string floatType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            float num = float.Parse(str);
-        }
-    }
-}";
+            float num = {floatType}.Parse(str);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(FloatParseAnalyzer))
                 .WithLocation(line: 10, column: 25)
@@ -85,22 +88,23 @@ namespace SomeApplication
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
         
-        [Fact]
-        public async Task TryParseWithoutCulture_WithDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.FloatType), MemberType = typeof(TestData))]
+        public async Task TryParseWithoutCulture_WithDiagnostics(string floatType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            float.TryParse(str, out var num);
-        }
-    }
-}";
+            {floatType}.TryParse(str, out var num);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(FloatParseAnalyzer))
                 .WithLocation(line: 10, column: 13)

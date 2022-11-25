@@ -5,13 +5,13 @@ using MigrateToDocker.Analyzers.Abstract;
 namespace MigrateToDocker.Analyzers.ParseAnalyzers;
 
 /// <summary>
-/// Parameterless <see cref="decimal.Parse(string)"/> or <see cref="decimal.TryParse(string?, out decimal)"/>
+/// Parameterless <see cref="DateTimeOffset.Parse(string)"/> or <see cref="DateTimeOffset.TryParse(string?, out DateTimeOffset)"/>
 /// method usage analyzer
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DecimalParseAnalyzer : ParseAnalyzerBase
+public sealed class DateTimeOffsetParseAnalyzer : ParseAnalyzerBase
 {
-    public const string DiagnosticId = nameof(DecimalParseAnalyzer);
+    public const string DiagnosticId = nameof(DateTimeOffsetParseAnalyzer);
 
     private static readonly DiagnosticDescriptor descriptor = new(
         DiagnosticId,
@@ -23,7 +23,7 @@ public sealed class DecimalParseAnalyzer : ParseAnalyzerBase
         LocalizableStrings.ParseAnalyzer.Description);
 
     private static readonly string[] memberSymbols =
-        { "decimal.Parse(string)", "decimal.TryParse(string?, out decimal)" };
+        { "System.DateTimeOffset.Parse(string)", "System.DateTimeOffset.TryParse(string?, out System.DateTimeOffset)" };
 
     /// <inheritdoc/>
     protected override DiagnosticDescriptor DiagnosticDescriptor => descriptor;

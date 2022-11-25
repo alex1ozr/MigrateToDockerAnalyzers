@@ -16,65 +16,67 @@ namespace MigrateToDocker.Analyzers.Test.ParseAnalyzers
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-        [Fact]
-        public async Task ParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DecimalType), MemberType = typeof(TestData))]
+        public async Task ParseWithFormat_WithoutDiagnostics(string decimalType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            decimal num = Decimal.Parse(str, CultureInfo.InvariantCulture);
-        }
-    }
-}";
+            decimal num = {decimalType}.Parse(str, CultureInfo.InvariantCulture);
+        }}
+    }}
+}}";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
         
-        [Fact]
-        public async Task TryParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DecimalType), MemberType = typeof(TestData))]
+        public async Task TryParseWithFormat_WithoutDiagnostics(string decimalType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            Decimal.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
-        }
-    }
-}";
+            {decimalType}.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
+        }}
+    }}
+}}";
             
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
-
-
-        [Fact]
-        public async Task ParseWithoutCulture_WithDiagnostics()
+        
+        [Theory]
+        [MemberData(nameof(TestData.DecimalType), MemberType = typeof(TestData))]
+        public async Task ParseWithoutCulture_WithDiagnostics(string decimalType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            decimal num = Decimal.Parse(str);
-        }
-    }
-}";
+            decimal num = {decimalType}.Parse(str);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(DecimalParseAnalyzer))
                 .WithLocation(line: 10, column: 27)
@@ -85,22 +87,23 @@ namespace SomeApplication
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
         
-        [Fact]
-        public async Task TryParseWithoutCulture_WithDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DecimalType), MemberType = typeof(TestData))]
+        public async Task TryParseWithoutCulture_WithDiagnostics(string decimalType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            Decimal.TryParse(str, out var num);
-        }
-    }
-}";
+            {decimalType}.TryParse(str, out var num);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(DecimalParseAnalyzer))
                 .WithLocation(line: 10, column: 13)

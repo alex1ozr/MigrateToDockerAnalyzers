@@ -16,65 +16,67 @@ namespace MigrateToDocker.Analyzers.Test.ParseAnalyzers
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-        [Fact]
-        public async Task ParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DoubleType), MemberType = typeof(TestData))]
+        public async Task ParseWithFormat_WithoutDiagnostics(string doubleType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            double num = Double.Parse(str, CultureInfo.InvariantCulture);
-        }
-    }
-}";
+            double num = {doubleType}.Parse(str, CultureInfo.InvariantCulture);
+        }}
+    }}
+}}";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
         
-        [Fact]
-        public async Task TryParseWithFormat_WithoutDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DoubleType), MemberType = typeof(TestData))]
+        public async Task TryParseWithFormat_WithoutDiagnostics(string doubleType)
         {
-            var test = @"
+            var test = $@"
 using System;
 using System.Globalization;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            Double.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
-        }
-    }
-}";
+            {doubleType}.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var num);
+        }}
+    }}
+}}";
             
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
-
-
-        [Fact]
-        public async Task ParseWithoutCulture_WithDiagnostics()
+        
+        [Theory]
+        [MemberData(nameof(TestData.DoubleType), MemberType = typeof(TestData))]
+        public async Task ParseWithoutCulture_WithDiagnostics(string doubleType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            double num = Double.Parse(str);
-        }
-    }
-}";
+            double num = {doubleType}.Parse(str);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(DoubleParseAnalyzer))
                 .WithLocation(line: 10, column: 26)
@@ -85,22 +87,23 @@ namespace SomeApplication
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
         
-        [Fact]
-        public async Task TryParseWithoutCulture_WithDiagnostics()
+        [Theory]
+        [MemberData(nameof(TestData.DoubleType), MemberType = typeof(TestData))]
+        public async Task TryParseWithoutCulture_WithDiagnostics(string doubleType)
         {
-            var test = @"
+            var test = $@"
 using System;
 namespace SomeApplication
-{
-    class {|#0:ClassName|}
-    {
+{{
+    class {{|#0:ClassName|}}
+    {{
         void Main()
-        {
+        {{
             string str = ""1.5"";
-            Double.TryParse(str, out var num);
-        }
-    }
-}";
+            {doubleType}.TryParse(str, out var num);
+        }}
+    }}
+}}";
 
             var expected = VerifyCS.Diagnostic(nameof(DoubleParseAnalyzer))
                 .WithLocation(line: 10, column: 13)
